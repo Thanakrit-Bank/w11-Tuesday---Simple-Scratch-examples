@@ -1,51 +1,48 @@
-int Health = 5;
-float posX, posY;
-float x, y;
+int Health;
+float x, y, z;
 
 void setup() {
   size(640,640);
-  //background(255);
+  Health = 5;
 }
 
 void draw() {
   background(255);
-  Bear(150,240,50,180);
-  Cat(450+x,360+y,80);
+  Bear(150,0,50,630);
+  Cat(450+x,360+y,80+z);
 }
 
 void Bear(float posX, float posY, int widthSize, int heightSize) {
   rect(posX,posY,widthSize,heightSize);
 }
 
-void Cat(float posX, float posY, int size) {
+void Cat(float posX, float posY, float size) {
   ellipse(posX, posY ,size, size);
   
-  Health = 5;
-  
-  if (posX+80 <= 150) {
+  // when Cat hit the Bear will return to start point
+  if (posX-80 <= 150) {
     Health -= 1;
-    delay(10);
+    x = posX/4;
   }
   
+  // set Cat size to 0 or disapear = dead
   if (Health < 1) {
-    // pass
+    z = -80;
   }
   
-  //posX = posX + x;
-  //posY = posY + y;
-  
+  // d = right, a = left, w = up, s = down
   if (key == 'd' || key == 'D') {
-    x += 10;
+    x += 4;
   } else {
     if (key == 'a' || key == 'A') {
-      x -= 10;
+      x -= 4;
     } else {
       if (key == 'w' || key == 'W') {
-        y -= 10;
+        y -= 4;
       }
     }
   }
   if (key == 's' || key == 'S') {
-    y += 10;
+    y += 4;
   }
 }
